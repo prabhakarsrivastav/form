@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form4 = () => {
+const SafetyRiskSelfPreservationAssessment = () => {
     // Helper for rendering the 0-4 scale checkboxes
     return (
         <div className="w-full bg-white text-black text-[9px] md:text-[12px] font-serif flex justify-center mt-4">
@@ -637,4 +637,4 @@ const Form4 = () => {
 
 };
 
-export default Form4;
+export default SafetyRiskSelfPreservationAssessment;

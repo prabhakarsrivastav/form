@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form5 = () => {
+const AbnormalInvoluntaryMovementScale = () => {
     return (
         <div className="w-full bg-white text-black font-serif text-[9px] md:text-[13px] flex justify-center mt-4 mb-4">
             <div className="w-[98%] md:w-[85%] lg:w-[60%]">
@@ -286,4 +286,4 @@ const Form5 = () => {
 
 };
 
-export default Form5;
+export default AbnormalInvoluntaryMovementScale;

@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../assets/logo.jpg';
 import bodyDiagram from '../assets/body_diagram.png';
 
-const Form3 = () => {
+const SkinIntegrityForm = () => {
     return (
         <div className="w-full max-w-[21cm] mx-auto p-2 md:p-8 bg-white min-h-screen text-black font-serif text-sm md:text-base leading-tight">
 
@@ -205,4 +205,4 @@ const Form3 = () => {
     );
 };
 
-export default Form3;
+export default SkinIntegrityForm;

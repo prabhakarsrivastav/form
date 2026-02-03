@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo.jpg';
 
-const Form8 = () => {
+const CodeOfEthicsPolicy = () => {
     return (
         <div className="w-full bg-white min-h-screen text-black font-serif flex justify-center mt-4 mb-8">
             <div className="w-[98%] md:w-[85%] lg:w-[60%] p-2 md:p-12 text-[9px] md:text-base leading-snug">
@@ -94,4 +94,4 @@ const Form8 = () => {
     );
 };
 
-export default Form8;
+export default CodeOfEthicsPolicy;

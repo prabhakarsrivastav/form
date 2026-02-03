@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo.jpg';
 
-export default function Form2() {
+export default function ComprehensiveNursingAssessment() {
     return (
         <div className="w-full bg-white text-black text-[9px] md:text-[12px] font-serif flex justify-center mt-5">
             <div className="w-[98%] md:w-[85%] lg:w-[60%]">

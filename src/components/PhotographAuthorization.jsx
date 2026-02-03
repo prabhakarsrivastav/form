@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo.jpg';
 
-const Form6 = () => {
+const PhotographAuthorization = () => {
     return (
         <div className="w-full bg-white min-h-screen text-black font-serif flex justify-center mt-4 mb-8">
             <div className="w-[98%] md:w-[85%] lg:w-[60%] p-2 md:p-12">
@@ -99,4 +99,4 @@ const Form6 = () => {
     );
 };
 
-export default Form6;
+export default PhotographAuthorization;

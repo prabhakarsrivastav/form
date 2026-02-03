@@ -1,7 +1,7 @@
 import React from 'react';
 import dbhddLogo from '../assets/dbhdd_logo.png'; // Assuming logo usage, though Form 10 image shows DBHDD logo. I'll use text header if logo isn't available or standard logo.
 
-const Form10 = () => {
+const AuthorizationForReleaseOfInformation = () => {
     return (
         <div className="w-full bg-white min-h-screen text-black font-serif flex justify-center mt-4 mb-8">
             <div className="w-[98%] md:w-[85%] lg:w-[60%] p-2 md:p-12 text-[9px] md:text-base leading-snug">
@@ -271,4 +271,4 @@ const Form10 = () => {
     );
 };
 
-export default Form10;
+export default AuthorizationForReleaseOfInformation;
