@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const DetailedTableOfContents = () => {
     const chapters = [
@@ -58,36 +58,95 @@ const DetailedTableOfContents = () => {
         }
     ];
 
-    const renderInput = (desc) => {
-        if (!desc) return <input type="text" className="w-full bg-transparent border-b border-black outline-none min-w-0" />;
+    const [formData, setFormData] = useState({});
+
+    const handleChange = (key, value) => {
+        setFormData(prev => ({
+            ...prev,
+            [key]: value
+        }));
+    };
+
+    const handleFileChange = (key, file) => {
+        setFormData(prev => ({
+            ...prev,
+            [key]: file ? file.name : '' // Store filename for now, typically you'd handle file upload separately
+        }));
+    };
+
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            // Simple focus next input logic
+            const form = e.target.form;
+            if (form) {
+                const index = Array.prototype.indexOf.call(form, e.target);
+                if (form.elements[index + 1]) {
+                    form.elements[index + 1].focus();
+                }
+            }
+        }
+    };
+
+    const logData = () => {
+        console.log('DetailedTableOfContents Data:', formData);
+    };
+
+    const renderInput = (desc, chapterIndex, rowIndex) => {
+        const key = `c${chapterIndex}r${rowIndex}`;
+        const commonProps = {
+            name: key,
+            className: "w-full bg-transparent border-b border-black outline-none min-w-0 flex-shrink",
+            onKeyDown: handleEnter,
+            // Using type="text" for most inputs to ensure consistent styling
+        };
+
+        if (!desc) {
+            return <input type="text" value={formData[key] || ''} onChange={(e) => handleChange(key, e.target.value)} {...commonProps} />;
+        }
+
         const lowerDesc = desc.toLowerCase();
 
         if (lowerDesc.includes("upload")) {
             return (
                 <div className="flex items-center w-full">
-                    <input type="file" className="text-[9px] w-full min-w-0" />
+                    <input
+                        type="file"
+                        className="text-[9px] w-full min-w-0"
+                        name={key}
+                        onChange={(e) => handleFileChange(key, e.target.files[0])}
+                    />
                 </div>
             );
         } else if (lowerDesc.includes("sign")) {
-            return <input type="text" placeholder="Sign/Date" className="w-full bg-transparent border-b border-black outline-none min-w-0 flex-shrink" />;
+            return <input type="text" placeholder="Sign/Date" value={formData[key] || ''} onChange={(e) => handleChange(key, e.target.value)} {...commonProps} />;
         } else if (lowerDesc.includes("placeholder") || lowerDesc.includes("enter data")) {
-            return <input type="text" placeholder="Enter Data" className="w-full bg-transparent border-b border-black outline-none min-w-0 flex-shrink" />;
+            return <input type="text" placeholder="Enter Data" value={formData[key] || ''} onChange={(e) => handleChange(key, e.target.value)} {...commonProps} />;
         } else if (lowerDesc.includes("fillable")) {
-            return <input type="text" placeholder="Fillable" className="w-full bg-transparent border-b border-black outline-none min-w-0 flex-shrink" />;
+            return <input type="text" placeholder="Fillable" value={formData[key] || ''} onChange={(e) => handleChange(key, e.target.value)} {...commonProps} />;
         } else {
-            return <input type="text" className="w-full bg-transparent border-b border-black outline-none min-w-0 flex-shrink" />;
+            return <input type="text" value={formData[key] || ''} onChange={(e) => handleChange(key, e.target.value)} {...commonProps} />;
         }
     };
 
     return (
         <div className="w-full bg-white min-h-screen text-black font-sans flex justify-center mt-4 mb-8">
-            <div className="w-[98%] md:w-[85%] lg:w-[60%] p-1 md:p-5 bg-white text-[9px] md:text-sm border-2 border-black">
+            <div className="w-[98%] md:w-[85%] lg:w-[60%] p-1 md:p-5 bg-white text-[9px] md:text-sm border-2 border-black relative">
+                <div className="absolute top-2 right-2 no-print">
+                    <button
+                        type="button"
+                        onClick={logData}
+                        className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs"
+                    >
+                        Log Data
+                    </button>
+                </div>
 
                 {/* Header */}
                 <h1 className="text-xl md:text-2xl font-bold uppercase text-center mb-6">TABLE OF CONTENTS</h1>
 
                 {/* Table */}
-                <div className="border-2 border-black">
+                <form className="border-2 border-black">
                     {chapters.map((chapter, chapterIndex) => (
                         <React.Fragment key={chapterIndex}>
                             {/* Chapter Header */}
@@ -117,12 +176,12 @@ const DetailedTableOfContents = () => {
                                 <div key={rowIndex} className="grid grid-cols-[50%_10%_40%] border-b border-black text-[9px] md:text-sm min-h-[30px]">
                                     <div className="p-1 border-r border-black pl-2 flex items-center">{row.name}</div>
                                     <div className="p-1 border-r border-black text-center flex items-center justify-center">{row.number}</div>
-                                    <div className="p-1 pl-2 flex items-center w-full">{renderInput(row.desc)}</div>
+                                    <div className="p-1 pl-2 flex items-center w-full">{renderInput(row.desc, chapterIndex, rowIndex)}</div>
                                 </div>
                             ))}
                         </React.Fragment>
                     ))}
-                </div>
+                </form>
             </div>
         </div>
     );

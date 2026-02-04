@@ -1,7 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo.jpg';
 
 const ClientVehicleTransportationFundsPolicy = () => {
+    const [formData, setFormData] = useState({
+        clientRepSignature: '',
+        clientRepDate: '',
+        admissionRepSignature: '',
+        admissionRepDate: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const form = e.target.form;
+            const index = Array.prototype.indexOf.call(form, e.target);
+            form.elements[index + 1].focus();
+        }
+    };
+
+    const logData = () => {
+        console.log('ClientVehicleTransportationFundsPolicy Data:', formData);
+    };
+
     return (
         <div className="w-full bg-white min-h-screen text-black font-serif flex justify-center mt-4 mb-8">
             <div className="w-[98%] md:w-[85%] lg:w-[60%] p-2 md:p-12 text-[9px] md:text-base leading-snug">
@@ -108,23 +136,68 @@ const ClientVehicleTransportationFundsPolicy = () => {
                     </p>
                 </div>
 
-                {/* Signatures */}
-                <div className="grid grid-cols-2 gap-4 md:gap-16 mt-8 md:mt-12">
-                    <div>
-                        <input type="text" className="w-full border-b-2 border-black outline-none mb-1 font-bold" />
-                        <div className="flex justify-between font-bold italic">
-                            <span>Client Representative Signature</span>
-                            <span className="mr-4 md:mr-8">Date</span>
+                <form>
+                    {/* Signatures */}
+                    <div className="grid grid-cols-2 gap-4 md:gap-16 mt-8 md:mt-12">
+                        <div>
+                            <div className="flex gap-2 mb-1">
+                                <input
+                                    type="text"
+                                    name="clientRepSignature"
+                                    value={formData.clientRepSignature}
+                                    onChange={handleChange}
+                                    onKeyDown={handleEnter}
+                                    className="w-3/4 border-b-2 border-black outline-none font-bold"
+                                />
+                                <input
+                                    type="date"
+                                    name="clientRepDate"
+                                    value={formData.clientRepDate}
+                                    onChange={handleChange}
+                                    onKeyDown={handleEnter}
+                                    className="w-1/4 border-b-2 border-black outline-none font-bold"
+                                />
+                            </div>
+                            <div className="flex justify-between font-bold italic">
+                                <span>Client Representative Signature</span>
+                                <span className="mr-4 md:mr-8">Date</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex gap-2 mb-1">
+                                <input
+                                    type="text"
+                                    name="admissionRepSignature"
+                                    value={formData.admissionRepSignature}
+                                    onChange={handleChange}
+                                    onKeyDown={handleEnter}
+                                    className="w-3/4 border-b-2 border-black outline-none font-bold"
+                                />
+                                <input
+                                    type="date"
+                                    name="admissionRepDate"
+                                    value={formData.admissionRepDate}
+                                    onChange={handleChange}
+                                    onKeyDown={handleEnter}
+                                    className="w-1/4 border-b-2 border-black outline-none font-bold"
+                                />
+                            </div>
+                            <div className="flex justify-between font-bold italic">
+                                <span>Admission Representative Signature</span>
+                                <span className="mr-4 md:mr-8">Date</span>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <input type="text" className="w-full border-b-2 border-black outline-none mb-1 font-bold" />
-                        <div className="flex justify-between font-bold italic">
-                            <span>Admission Representative Signature</span>
-                            <span className="mr-4 md:mr-8">Date</span>
-                        </div>
-                    </div>
-                </div>
+                    {/*<div className="mt-4 flex justify-center no-print">
+                        <button
+                            type="button"
+                            onClick={logData}
+                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        >
+                            Log Data
+                        </button>
+                    </div>*/}
+                </form>
             </div>
         </div>
     );

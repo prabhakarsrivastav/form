@@ -1,7 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo.jpg';
 
 const ClientRightsResponsibilities = () => {
+    const [formData, setFormData] = useState({
+        clientSignature: '',
+        clientSignatureDate: '',
+        administratorSignature: '',
+        administratorSignatureDate: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const form = e.target.form;
+            const index = Array.prototype.indexOf.call(form, e.target);
+            form.elements[index + 1].focus();
+        }
+    };
+
+    const logData = () => {
+        console.log('ClientRightsResponsibilities Data:', formData);
+    };
+
     return (
         <div className="w-full bg-white min-h-screen text-black font-serif flex justify-center mt-4 mb-8">
             <div className="w-[98%] md:w-[85%] lg:w-[60%] p-2 md:p-12 text-[9px] md:text-base leading-snug">
@@ -87,25 +115,64 @@ const ClientRightsResponsibilities = () => {
                     </p>
                 </div>
 
-                {/* Signatures */}
-                <div className="grid grid-cols-2 gap-4 md:gap-16 mt-12 mb-12">
-                    <div>
-                        <input type="text" className="w-full border-t border-black outline-none mt-8" />
-                        <div className="font-bold">Signature of Client/ Client Representative</div>
+                <form>
+                    {/* Signatures */}
+                    <div className="grid grid-cols-2 gap-4 md:gap-16 mt-12 mb-12">
+                        <div>
+                            <input
+                                type="text"
+                                name="clientSignature"
+                                value={formData.clientSignature}
+                                onChange={handleChange}
+                                onKeyDown={handleEnter}
+                                className="w-full border-t border-black outline-none mt-8"
+                            />
+                            <div className="font-bold">Signature of Client/ Client Representative</div>
+                        </div>
+                        <div>
+                            <input
+                                type="date"
+                                name="clientSignatureDate"
+                                value={formData.clientSignatureDate}
+                                onChange={handleChange}
+                                onKeyDown={handleEnter}
+                                className="w-full border-t border-black outline-none mt-8"
+                            />
+                            <div className="font-bold">Date</div>
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="administratorSignature"
+                                value={formData.administratorSignature}
+                                onChange={handleChange}
+                                onKeyDown={handleEnter}
+                                className="w-full border-t border-black outline-none mt-8"
+                            />
+                            <div className="font-bold">Signature of Administrator</div>
+                        </div>
+                        <div>
+                            <input
+                                type="date"
+                                name="administratorSignatureDate"
+                                value={formData.administratorSignatureDate}
+                                onChange={handleChange}
+                                onKeyDown={handleEnter}
+                                className="w-full border-t border-black outline-none mt-8"
+                            />
+                            <div className="font-bold">Date</div>
+                        </div>
                     </div>
-                    <div>
-                        <input type="date" className="w-full border-t border-black outline-none mt-8" />
-                        <div className="font-bold">Date</div>
-                    </div>
-                    <div>
-                        <input type="text" className="w-full border-t border-black outline-none mt-8" />
-                        <div className="font-bold">Signature of Administrator</div>
-                    </div>
-                    <div>
-                        <input type="date" className="w-full border-t border-black outline-none mt-8" />
-                        <div className="font-bold">Date</div>
-                    </div>
-                </div>
+                    {/*<div className="mt-4 flex justify-center no-print">
+                        <button
+                            type="button"
+                            onClick={logData}
+                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        >
+                            Log Data
+                        </button>
+                    </div>*/}
+                </form>
 
                 {/* Footer */}
                 <div className="text-center text-[8px] md:text-sm font-bold mt-12">

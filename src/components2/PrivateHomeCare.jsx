@@ -1,6 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const PrivateHomeCare = () => {
+    const [formData, setFormData] = useState({
+        adminName: '',
+        contactPhone: '',
+        clientSignature: '',
+        acknowledgementName: '',
+        signatureDate: '',
+        clientSignatureBottom: '',
+        dateBottom: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const inputs = Array.from(document.querySelectorAll('input, select, textarea'));
+            const index = inputs.indexOf(e.target);
+            if (index > -1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        }
+    };
+
     return (
         <div className="w-full bg-white min-h-screen text-black font-serif flex justify-center mt-4 mb-8">
             <div className="w-[98%] md:w-[85%] lg:w-[60%] p-2 md:p-12 bg-white text-[10px] md:text-sm leading-relaxed border-2 border-black">
@@ -16,11 +45,17 @@ const PrivateHomeCare = () => {
                 </p>
 
                 {/* Highlighted Administrator Section */}
-                {/* Highlighted Administrator Section */}
                 <div className="mb-6">
                     <div className="flex items-center">
                         <span className="font-bold bg-yellow-300 px-1 mr-2 whitespace-nowrap text-[9px] md:text-sm">THE AGENCY ADMINISTRATOR:</span>
-                        <input type="text" className="border-b-2 border-black flex-grow outline-none min-w-0 w-full" />
+                        <input
+                            type="text"
+                            name="adminName"
+                            value={formData.adminName}
+                            onChange={handleChange}
+                            onKeyDown={handleEnter}
+                            className="border-b-2 border-black flex-grow outline-none min-w-0 w-full"
+                        />
                     </div>
                 </div>
 
@@ -32,7 +67,14 @@ const PrivateHomeCare = () => {
                 <div className="mb-6">
                     <div className="flex items-center">
                         <span className="font-bold bg-yellow-300 px-1 mr-2 whitespace-nowrap text-[9px] md:text-sm">This agencies contact phone number is:</span>
-                        <input type="text" className="border-b-2 border-black flex-grow outline-none min-w-0 w-full" />
+                        <input
+                            type="text"
+                            name="contactPhone"
+                            value={formData.contactPhone}
+                            onChange={handleChange}
+                            onKeyDown={handleEnter}
+                            className="border-b-2 border-black flex-grow outline-none min-w-0 w-full"
+                        />
                     </div>
                 </div>
 
@@ -61,19 +103,49 @@ const PrivateHomeCare = () => {
 
                 {/* Acknowledgement/Signature */}
                 <div className="mb-8 font-bold leading-loose text-justify">
-                    I <input type="text" className="border-b-2 border-black w-[150px] md:w-64 outline-none inline-block mx-2 bg-transparent text-center" />
+                    I <input
+                        type="text"
+                        name="acknowledgementName"
+                        value={formData.acknowledgementName}
+                        onChange={handleChange}
+                        onKeyDown={handleEnter}
+                        className="border-b-2 border-black w-[150px] md:w-64 outline-none inline-block mx-2 bg-transparent text-center"
+                    />
                     acknowledge the rights listed above have been shared and or explained to me and I fully understand what those rights are. I have also been given a copy of the right
                 </div>
 
                 <div className="flex gap-4 items-end font-bold">
                     <div className="flex-1 flex items-end">
                         <span className="mr-2 whitespace-nowrap">Client Signature:</span>
-                        <input type="text" className="border-b-2 border-black flex-grow outline-none min-w-0" />
+                        <input
+                            type="text"
+                            name="clientSignatureBottom"
+                            value={formData.clientSignatureBottom}
+                            onChange={handleChange}
+                            onKeyDown={handleEnter}
+                            className="border-b-2 border-black flex-grow outline-none min-w-0"
+                        />
                     </div>
                     <div className="w-[30%] flex items-end">
                         <span className="mr-2">Date:</span>
-                        <input type="date" className="border-b-2 border-black flex-grow outline-none min-w-0" />
+                        <input
+                            type="date"
+                            name="dateBottom"
+                            value={formData.dateBottom}
+                            onChange={handleChange}
+                            onKeyDown={handleEnter}
+                            className="border-b-2 border-black flex-grow outline-none min-w-0"
+                        />
                     </div>
+                </div>
+
+                <div className="flex justify-center p-4">
+                    <button
+                        onClick={() => console.log(formData)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
+                    >
+                        Log Data
+                    </button>
                 </div>
 
             </div>

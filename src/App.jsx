@@ -19,6 +19,10 @@ import ServiceAgreementAddendum from './components2/ServiceAgreementAddendum';
 import ClientBasicInfo from './components2/ClientBasicInfo';
 import ClientServicePlan from './components2/ClientServicePlan';
 import ServiceAgreementForm from './components2/ServiceAgreementForm';
+import ClientComplaintForm from './components3/ClientComplaintForm';
+import HomeSupervisoryVisitForm from './components3/HomeSupervisoryVisitForm';
+import SourceCCSPPrograms from './components3/SourceCCSPPrograms';
+import IncidentReportingForm from './components3/IncidentReportingForm';
 
 function App() {
   return (
@@ -90,6 +94,22 @@ function App() {
                 Go to Service Agreement Form
               </Link>
             </div>
+
+            <h2 className="text-2xl font-bold mt-12 mb-4">Component 3 Forms</h2>
+            <div className="flex flex-col gap-4 w-full max-w-md">
+              <Link to="/client-complaint" className="bg-white p-6 rounded shadow hover:shadow-lg transition text-xl font-semibold text-center text-pink-800">
+                Client Complaint Form
+              </Link>
+              <Link to="/home-supervisory-visit-form" className="bg-white p-6 rounded shadow hover:shadow-lg transition text-xl font-semibold text-center text-green-800">
+                Home Supervisory Visit Form (New)
+              </Link>
+              <Link to="/source-ccsp-programs" className="bg-white p-6 rounded shadow hover:shadow-lg transition text-xl font-semibold text-center text-orange-600">
+                SOURCE/CCSP PROGRAMS Index
+              </Link>
+              <Link to="/incident-reporting-form" className="bg-white p-6 rounded shadow hover:shadow-lg transition text-xl font-semibold text-center text-red-600">
+                Incidence Report Form (New)
+              </Link>
+            </div>
           </div>
         } />
         <Route path="/patient-medication-record" element={<PatientMedicationRecord />} />
@@ -111,6 +131,10 @@ function App() {
         <Route path="/client-basic-info" element={<ClientBasicInfo />} />
         <Route path="/client-service-plan" element={<ClientServicePlan />} />
         <Route path="/service-agreement-form" element={<ServiceAgreementForm />} />
+        <Route path="/client-complaint" element={<ClientComplaintForm />} />
+        <Route path="/home-supervisory-visit-form" element={<HomeSupervisoryVisitForm />} />
+        <Route path="/source-ccsp-programs" element={<SourceCCSPPrograms />} />
+        <Route path="/incident-reporting-form" element={<IncidentReportingForm />} />
       </Routes>
     </Router>
   );
